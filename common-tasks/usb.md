@@ -218,8 +218,46 @@ If you do not have the package installed you will see this error: `ERROR: qubes-
 You install the `qubes-usb-proxy` package using the package manager as usual.
 
 - Fedora: `sudo dnf install qubes-usb-proxy`
-- Debian/Ubuntu: `sudo apt-get install qubes-usb-proxy`
+- Debian: `sudo apt-get install qubes-usb-proxy`
+- Qubuntu:  *unofficially supported, see below* 
 
+    #### Qubuntu install steps:
+    ```
+    #You built 'qubes-usb-proxy' when you built your Ubuntu template.
+    #Replace all qube names and paths with your own if they are different.
+    #Install in your Ubuntu template_vm if you want these changes to be persistent.
+    =====================================================================================
+    #First we are going to copy the mirror repo from your build qube to your Ubuntu qube.
+    #Open a terminal in your build qube.
+    [user@build] ~$ qvm-copy-to-vm Ubuntu ~/qubes-builder/qubes-packages-mirror-repo/
+    
+    #Click allow.
+    #Once that is complete you can close the build qube if you like.
+    
+    #Now we are going to setup the mirror repo.
+    #Open a terminal in your Ubuntu qube.
+    #Copy the repo to the add-on software directory.
+    [user@Ubuntu] ~$ sudo cp -rv ~/QubesIncoming/qubes-packages-mirror-repo /opt/
+    
+    #Write the file that tell apt about your repo.
+    [user@Ubuntu] ~$ sudo nano /etc/apt/sources.list.d/qubesos.list
+    
+    #Enter the below:
+        deb [trusted=true] file:/opt/qubes-packages-mirror-repo/xenial xenial main
+    #Press 'ctrl+x' and then 'y'.
+    
+    #Check that the file saved correctly.
+    [user@Ubuntu] ~$ sudo cat /etc/apt/sources.list.d/qubesos.list
+    
+    #Finally we install 'qubes-usb-proxy' like normal.
+    [user@Ubuntu] ~$ sudo aptitude install qubes-usb-proxy
+    
+    #If that completes successfully, you are done!
+    =====================================================================================
+    ```
+  
+  
+  
 ### Usage of qubes-usb-proxy (R4.0) ###
 
 This feature is also available from the Devices Widget.

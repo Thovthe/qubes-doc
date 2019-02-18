@@ -239,14 +239,14 @@ You install the `qubes-usb-proxy` package using the package manager as usual.
     #Copy the repo to the add-on software directory.
     [user@Ubuntu] ~$ sudo cp -rv ~/QubesIncoming/qubes-packages-mirror-repo /opt/
     
-    #Write the file that tell apt about your repo.
+    #Write the file that tells apt about your repo.
     [user@Ubuntu] ~$ sudo nano /etc/apt/sources.list.d/qubesos.list
     
     #Enter the below:
         deb [trusted=true] file:/opt/qubes-packages-mirror-repo/xenial xenial main
     #Press 'ctrl+x' and then 'y'.
     
-    #Check that the file saved correctly.
+    #Check that the file was saved correctly.
     [user@Ubuntu] ~$ sudo cat /etc/apt/sources.list.d/qubesos.list
     
     #Finally we install 'qubes-usb-proxy' like normal.
